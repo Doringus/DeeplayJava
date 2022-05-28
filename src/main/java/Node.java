@@ -1,9 +1,16 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
 
-    public Node(List<Edge> neighbours) {
-        this.neighbours = neighbours;
+    public int x, y; /// move to separate class
+
+    public Node() {
+        this.neighbours = new ArrayList<>();
+    }
+
+    public void addEdge(Edge edge) {
+        neighbours.add(edge);
     }
 
     public List<Edge> getNeighbours() {
@@ -11,8 +18,13 @@ public class Node {
     }
 
     public static class Edge {
-        public int weight;
+        public double weight;
         public Node node;
+
+        public Edge(double weight, Node neighbour) {
+            this.weight = weight;
+            this.node = neighbour;
+        }
     }
 
     private List<Edge> neighbours;

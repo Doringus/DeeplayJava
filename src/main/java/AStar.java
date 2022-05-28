@@ -35,14 +35,21 @@ public class AStar {
         startNodeWrapper.globalWeight = heuristic.calculateDistance(start, end);
         startNodeWrapper.localWeight = 0.0;
         frontier.add(startNodeWrapper);
-        Node currentNode = start;
-        while (!frontier.isEmpty() && currentNode != end) {
+        visitedNodes.put(start, startNodeWrapper);
+        while (!frontier.isEmpty()) {
             AStarNodeWrapper topNode = frontier.poll();
-            currentNode = topNode.node;
-            for (Node.Edge neighbour: currentNode.getNeighbours()) {
+            if(topNode.node == end) {
+                return topNode.localWeight;
+            }
+            for (Node.Edge neighbour: topNode.node.getNeighbours()) {
                 double weight = topNode.localWeight + neighbour.weight;
-                if(!visitedNodes.containsKey(neighbour.node) || weight < topNode.localWeight) {
-
+                AStarNodeWrapper visitedNode = visitedNodes.getOrDefault(neighbour.node, new AStarNodeWrapper(neighbour.node));
+                visitedNodes.put(neighbour.node, visitedNode);
+                if(weight < visitedNode.localWeight) {
+                    visitedNode.localWeight = weight;
+                    visitedNode.parent = topNode.node;
+                    visitedNode.globalWeight = weight + heuristic.calculateDistance(neighbour.node, end);
+                    frontier.add(visitedNode);
                 }
             }
         }
