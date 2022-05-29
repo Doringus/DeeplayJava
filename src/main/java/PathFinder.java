@@ -1,34 +1,34 @@
+import game.GameWorldGraphAdapter;
+import game.GameWorldGrid;
+import game.PathConverter;
+import game.WorldNode;
+import pathfinder.AStar;
+
+import java.util.HashMap;
+
 public class PathFinder {
 
     public static void main(String[] args) {
         System.out.println("hello");
-        Node a = new Node();
-        Node b = new Node();
-        Node c = new Node();
-        Node d = new Node();
-        Node e = new Node();
-        Node f = new Node();
-
-        a.addEdge(new Node.Edge(3, b));
-        a.addEdge(new Node.Edge(1, d));
-        a.x = 0; a.y = 0;
-        b.addEdge(new Node.Edge(3, a));
-        b.addEdge(new Node.Edge(5, c));
-        b.x = 1; b.y = 0;
-        c.addEdge(new Node.Edge(5, b));
-        c.addEdge(new Node.Edge(1, f));
-        c.x = 2; c.y = 0;
-        f.addEdge(new Node.Edge(1, c));
-        f.addEdge(new Node.Edge(8, e));
-        f.x = 2; f.y = 1;
-        e.addEdge(new Node.Edge(8, f));
-        e.addEdge(new Node.Edge(2, d));
-        e.x = 1; e.y = 1;
-        d.addEdge(new Node.Edge(2, e));
-        d.addEdge(new Node.Edge(1, a));
-        d.x = 0; d.y = 1;
-
-        double r = AStar.solve(a, f, (lhs, rhs)-> Math.abs(lhs.x - rhs.x) + Math.abs(lhs.y - rhs.y));
+        GameWorldGrid graph = new GameWorldGrid("STWSWTPPTPTTPWPP");
+        HashMap<String, HashMap<Character, Integer>> mappings = new HashMap<>();
+        HashMap<Character, Integer> human = new HashMap<>();
+        human.put('T', 3);
+        human.put('W', 2);
+        human.put('P', 1);
+        human.put('S', 5);
+        mappings.put("Human", human);
+        HashMap<Character, Integer> orc = new HashMap<>();
+        orc.put('T', 1);
+        orc.put('W', 2);
+        orc.put('P', 6);
+        orc.put('S', 0);
+        mappings.put("Orc", orc);
+        PathConverter<Integer> pathConverter = new PathConverter<>(mappings);
+        GameWorldGraphAdapter graphAdapter = new GameWorldGraphAdapter(graph, pathConverter, "Human");
+        AStar<WorldNode> aStar = new AStar<WorldNode>(graphAdapter, (lhs, rhs) ->
+                Math.abs(rhs.getColumn() - lhs.getColumn()) + Math.abs(rhs.getRow() - lhs.getRow()));
+        aStar.solve(graph.getNode(0, 0), graph.getNode(3, 3));
     }
 
 }
