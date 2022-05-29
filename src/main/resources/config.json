@@ -1,0 +1,67 @@
+{
+  "weightsTable" : [
+    {
+      "name": "Human",
+      "weights": [
+        {
+          "symbol" : "S",
+          "value": 5
+        },
+        {
+          "symbol" : "T",
+          "value": 3
+        },
+        {
+          "symbol" : "P",
+          "value": 1
+        },
+        {
+          "symbol": "W",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Swamper",
+      "weights": [
+        {
+          "symbol" : "S",
+          "value": 2
+        },
+        {
+          "symbol" : "T",
+          "value": 5
+        },
+        {
+          "symbol" : "P",
+          "value": 2
+        },
+        {
+          "symbol": "W",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Woodman",
+      "weights": [
+        {
+          "symbol" : "S",
+          "value": 3
+        },
+        {
+          "symbol" : "T",
+          "value": 2
+        },
+        {
+          "symbol" : "P",
+          "value": 2
+        },
+        {
+          "symbol": "W",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

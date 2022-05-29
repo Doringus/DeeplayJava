@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GameWorldGraphAdapter implements IGraph<WorldNode> {
 
-    public GameWorldGraphAdapter(GameWorldGrid grid, PathConverter<Integer> converter, String perspective) {
+    public GameWorldGraphAdapter(GameWorldGrid grid, PathConverter converter, String perspective) {
         this.grid = grid;
         this.converter = converter;
         this.perspective = perspective;
@@ -24,5 +24,5 @@ public class GameWorldGraphAdapter implements IGraph<WorldNode> {
 
     private GameWorldGrid grid;
     private String perspective;
-    PathConverter<Integer> converter;
+    PathConverter converter;
 }
